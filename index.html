@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shareable Resume Builder</title>
+    <style>
+        /* Updated CSS for a blue and white theme */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e3f2fd; /* Light blue background */
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff; /* White background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #0d47a1; /* Dark blue */
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #1976d2; /* Blue */
+            color: white;
+            margin-right: 5px;
+        }
+        .btn-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #resume-preview {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #e3f2fd; /* Light blue background */
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 20px;
+            color: #1976d2; /* Blue */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Shareable Resume Builder</h1>
+        
+        <!-- Personal Information Section -->
+        <h3 class="section-title">Personal Information</h3>
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="text" id="contact" placeholder="Your Contact Details">
+        <input type="file" id="profile-pic" accept="image/*">
+        
+        <!-- Education Section -->
+        <h3 class="section-title">Education</h3>
+        <input type="text" id="school" placeholder="University/School Name">
+        <input type="text" id="degree" placeholder="Degree">
+        <input type="text" id="graduation-year" placeholder="Graduation Year">
+        
+        <!-- Work Experience Section -->
+        <h3 class="section-title">Work Experience</h3>
+        <input type="text" id="job-title" placeholder="Job Title">
+        <input type="text" id="company" placeholder="Company Name">
+        <input type="text" id="years-of-exp" placeholder="Years of Experience">
+        
+        <!-- Skills Section -->
+        <h3 class="section-title">Skills</h3>
+        <textarea id="skills" placeholder="List Your Skills"></textarea>
+
+        <!-- Resume Actions -->
+        <div class="btn-group">
+            <button id="generate-resume">Generate Resume</button>
+            <button id="copy-link">Copy Shareable Link</button>
+            <button id="download-pdf">Download as PDF</button>
+        </div>
+
+        <div id="resume-preview"></div>
+        <div class="footer">
+            &copy; 2024 Shareable Resume Builder by Yemna Mehmood. All rights reserved.
+        </div>
+    
+    </div>
+
+    <script>
+        // JavaScript functionality
+        document.getElementById('generate-resume').addEventListener('click', function () {
+            const name = document.getElementById('name').value;
+            const contact = document.getElementById('contact').value;
+            const school = document.getElementById('school').value;
+            const degree = document.getElementById('degree').value;
+            const graduationYear = document.getElementById('graduation-year').value;
+            const jobTitle = document.getElementById('job-title').value;
+            const company = document.getElementById('company').value;
+            const yearsOfExp = document.getElementById('years-of-exp').value;
+            const skills = document.getElementById('skills').value;
+
+            // Display resume preview
+            document.getElementById('resume-preview').innerHTML = `
+                <h2>${name}</h2>
+                <p><strong>Contact:</strong> ${contact}</p>
+                <p><strong>Education:</strong> ${school}, ${degree}, Class of ${graduationYear}</p>
+                <p><strong>Work Experience:</strong> ${jobTitle} at ${company}, ${yearsOfExp} years</p>
+                <p><strong>Skills:</strong> ${skills}</p>
+            `;
+        });
+
+        // Function to copy shareable link
+        document.getElementById('copy-link').addEventListener('click', function () {
+            const url = window.location.href; // Get current URL
+            navigator.clipboard.writeText(url).then(function () {
+                alert('Link copied to clipboard!');
+            }, function () {
+                alert('Failed to copy link!');
+            });
+        });
+
+        // Function to download resume as PDF
+        document.getElementById('download-pdf').addEventListener('click', function () {
+            const resumeContent = document.getElementById('resume-preview').innerHTML;
+            const pdfWindow = window.open('', '', 'width=800,height=900');
+            pdfWindow.document.write('<html><head><title>Resume PDF</title></head><body>');
+            pdfWindow.document.write(resumeContent);
+            pdfWindow.document.write('</body></html>');
+            pdfWindow.document.close();
+            pdfWindow.print();
+        });
+    </script>
+</body>
+</html>
