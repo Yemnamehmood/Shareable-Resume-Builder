@@ -38,11 +38,24 @@
             cursor: pointer;
             background-color: #1976d2; /* Blue */
             color: white;
-            margin-right: 5px;
+            margin-right:5px;
+            margin-bottom:10px;
+            width:100%;
+            
+
+        
         }
         .btn-group {
             text-align: center;
             margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-direction:column;
+            gap: 10px; /* Space between buttons */
+            margin-top: 20px;
+
+            
         }
         #resume-preview {
             border: 1px solid #ddd;
@@ -55,6 +68,19 @@
             margin-top: 20px;
             color: #1976d2; /* Blue */
         }
+        /* Media query for larger screens */
+          @media (min-width: 600px) {
+              .btn-group {
+                   flex-direction: row; /* Side-by-side buttons on larger screens */
+                   justify-content: center; /* Center align buttons horizontally */
+        }
+               button {
+                  width: auto; /* Buttons take their natural width */
+                  margin-right: 10px; /* Adds space between buttons */
+                  margin-bottom: 0; /* Removes bottom margin on larger screens */
+         }
+      }
+
     </style>
 </head>
 <body>
